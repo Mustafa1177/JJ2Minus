@@ -2,10 +2,12 @@
 #include "pch.h"
 #include "minus.h"
 
+using namespace Minus;
+
 namespace MinusFixes
 {
 	void ChangeDefaultNetUpdateRate(char internetDelay = 70, char lanDelay = 42) {
 		char* netDefInternetUpdateDelay = (char*)addrTable->NET_DEF_INTERNET_UPDATE_DELAY;
-		*netDefInternetUpdateDelay = internetDelay;
+		MemoryWrite((LPVOID)netDefInternetUpdateDelay, 10);
 	}
 }

@@ -3,22 +3,41 @@
 #include "addresses_table.h"
 #include "player.h"
 #include "minus.h"
+#include "minus_fixes.h"
 
-
-extern GameAddressTable* addrTable = new GameAddressTableTSF();
-extern PlayerPropertiesOffsetsTable* playOffstTable = new PlayerPropertiesOffsetsTableTSF();
-
-bool init() 
+namespace Minus 
 {
-    addrTable = new GameAddressTableTSF();
-    playOffstTable = new PlayerPropertiesOffsetsTableTSF();
-    return true;
-}
+	extern GameAddressTable* addrTable = new GameAddressTableTSF();
+	extern PlayerPropertiesOffsetsTable* playOffstTable = new PlayerPropertiesOffsetsTableTSF();
+	extern HANDLE hCurrentProcess = 0;
 
-/// <summary>This function is called on startup to setup jump points</summary>
-/// <returns>returns true if successful</returns>
-bool patchInitialize()
-{
-    MessageBoxA(NULL, "DLL STARTED!", "DLL STARTED", MB_OK);
-    return true;
+
+	void MemoryWrite(LPVOID address, unsigned char data)
+	{
+		DWORD dataSize = sizeof(data);
+		if (WriteProcessMemory(hCurrentProcess, address, &data, dataSize, NULL)) // newdatasize = 4 byte
+		{
+			//MessageBoxA(NULL, "WriteProcessMemory worked.", "Success", MB_OK + MB_ICONINFORMATION);
+		}
+		else
+		{
+			MessageBoxA(NULL, "Error cannot WriteProcessMemory!", "Error", MB_OK + MB_ICONERROR);
+		}
+	}
+	
+	bool init()
+	{
+		DWORD proccess_ID = GetCurrentProcessId();
+		hCurrentProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, proccess_ID);
+		addrTable = new GameAddressTableTSF();
+		playOffstTable = new PlayerPropertiesOffsetsTableTSF();
+		return patchInitialize();
+	}
+	
+	bool patchInitialize()
+	{
+		MessageBoxA(NULL, "DLL STARTED!", "DLL STARTED", MB_OK);
+		MinusFixes::ChangeDefaultNetUpdateRate(28, 14);
+		return true;
+	}
 }

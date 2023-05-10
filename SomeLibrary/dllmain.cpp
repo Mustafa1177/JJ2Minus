@@ -7,6 +7,10 @@
 #include "player.h"
 #include "minus_fixes.h"
 
+
+
+
+
 DWORD WINAPI MainThread(LPVOID param)
 {
 	GameAddressTable* addrTable = new GameAddressTableTSF();
@@ -20,11 +24,14 @@ DWORD WINAPI MainThread(LPVOID param)
 			int* player1Hp;
 			player1Hp = (int*)0x005C853E;
 			//*player1Hp = 0;
-			*player1.health = 0;
+			//*player1.health = 0;
 			MinusFixes::ChangeDefaultNetUpdateRate(10, 10);
+
+			//CloseHandle(hProcess);
 		}
 		Sleep(8);
 	}
+	
 	return 0;
 }
 
@@ -33,7 +40,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 	switch (ul_reason_for_call)
 	{
 	case DLL_PROCESS_ATTACH:
-		patchInitialize(); //call minus.cpp
+		Minus::init(); //call minus.cpp
 		CreateThread(0, 0, MainThread, hModule, 0, 0);
 		std::cout << "haha3" << std::endl;
 

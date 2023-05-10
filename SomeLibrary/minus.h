@@ -5,11 +5,16 @@
 #include "windows.h"
 #include "addresses_table.h"
 
-extern GameAddressTable* addrTable;
-extern PlayerPropertiesOffsetsTable* playOffstTable;
+namespace Minus
+{
+	extern GameAddressTable* addrTable;
+	extern PlayerPropertiesOffsetsTable* playOffstTable;
+	extern HANDLE hCurrentProcess;
 
-bool init();
+	void MemoryWrite(LPVOID address, unsigned char data);
 
-bool patchInitialize();
+	bool init();
 
+	bool patchInitialize();
+}
 #endif
