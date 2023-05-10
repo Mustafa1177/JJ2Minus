@@ -25,6 +25,11 @@ PlayerPropertiesOffsetsTableTSF::PlayerPropertiesOffsetsTableTSF()
 
 }
 
+GameFunctionsAddressTableTSF::GameFunctionsAddressTableTSF() 
+{
+	SEND_MESSAGE = 0x4833A0;
+}
+
 //v1.23 section
 GameAddressTableV23::GameAddressTableV23()
 {
@@ -43,60 +48,7 @@ PlayerPropertiesOffsetsTableV23::PlayerPropertiesOffsetsTableV23()
 
 }
 
-
-
-
-//////////////////////////////////////////////
-/* OLD IMPLEMENTATION
-
-struct GameAddressTable
-{ //This is an abstract
-	virtual void f() = 0;  // pure virtual
-
-public:
-	int PLAYER_STRUCT_SIZE;
-	DWORD PLAYERS_ARRAY;
-	DWORD MAX_SCORE;
-	DWORD SERVER_NAME;
-};
-
-struct PlayerOffsetsTable
-{ //This is an abstract
-	virtual void f() = 0;  // pure virtual
-
-public:
-	int WEAPONS_COUNT = 10;
-	DWORD Health;
-	DWORD POS_X;
-	DWORD POS_Y;
-};
-
-
-struct GameAddressTableTSF : GameAddressTable
+GameFunctionsAddressTableV23::GameFunctionsAddressTableV23()
 {
-	void f() override {}   // non-pure virtual
-	virtual void g();      // non-pure virtual
-
-public:
-	GameAddressTableTSF() {
-		PLAYERS_ARRAY = 0x005C8500;
-		MAX_SCORE = 0x005F37F0;
-		SERVER_NAME = 0x0061E7A8;
-
-		PLAYER_STRUCT_SIZE = 1444;
-	}
-
-}; // "GameAddressTableTSF" is non-abstract
-
-struct GameAddressTable23 : GameAddressTable
-{
-	void f() override {}   // non-pure virtual
-	virtual void g();      // non-pure virtual
-
-public:
-	GameAddressTable23() {
-		MAX_SCORE = 0x005F37F0;
-
-	}
-}; // "GameAddressTable23" is non-abstract
-*/
+	SEND_MESSAGE = 0x0;
+}

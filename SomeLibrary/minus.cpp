@@ -5,13 +5,16 @@
 #include "player.h"
 #include "minus.h"
 #include "minus_fixes.h"
+#include "minus_functions.h"
 
 namespace Minus 
 {
 	extern GameAddressTable* addrTable = new GameAddressTableTSF();
 	extern PlayerPropertiesOffsetsTable* playOffstTable = new PlayerPropertiesOffsetsTableTSF();
+	extern GameFunctionsAddressTable* funcAddrTable = new GameFunctionsAddressTableTSF();
 	extern HANDLE hCurrentProcess = 0;
 	extern DWORD plusBaseAddress = 0;
+
 
 	void MemoryWrite(LPVOID address, unsigned char data)
 	{
@@ -35,6 +38,7 @@ namespace Minus
 			MessageBoxA(NULL, "Error cannot OpenProcess!", "Error", MB_OK + MB_ICONERROR);
 		addrTable = new GameAddressTableTSF();
 		playOffstTable = new PlayerPropertiesOffsetsTableTSF();
+		funcAddrTable = new GameFunctionsAddressTableTSF();
 		//Learning();
 		if (!JJVariables::init(*addrTable))
 			res = false;
@@ -53,13 +57,28 @@ namespace Minus
 
 	void Learning() 
 	{
-		//HWND *pGameWindow = (HWND*)addrTable->GAME_WINDOW_POINTER;
+		char msg[] = "Hello World!\0";
+
+		typedef void func(char*);
+		func* f = (func*)funcAddrTable->SEND_MESSAGE;
+		//f(msg);
+
+
+		void (*myfunc)(char*);
+		myfunc = (void (*)(char*))0x4833A0;  //my leet version of address
+		
+		//myfunc(msg);
+	
+		SendChatMessage(msg);
+
+
 		HWND hGameWindow = *JJVariables::pGameWindow;
-		//HWND hGameWindow = (HWND)0x004F33FC;
+
 		HMENU hGameMenuBar = *JJVariables::pGameMenuBar;
 		
-		CreatePopupMenu();
+		//CreatePopupMenu();
 		AppendMenuA(hGameMenuBar, 0, 0, "Minus Test");
+		DrawMenuBar(hGameWindow);
 		//SetMenu(hGameWindow, NULL);
 		
 	}

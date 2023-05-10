@@ -8,7 +8,6 @@
 struct GameAddressTable
 { //abstract structure for global addresses
     virtual void f() = 0;  // pure virtual
-
     int PLAYER_STRUCT_SIZE;
     DWORD GAME_WINDOW_POINTER; // *HWND
     DWORD GAME_MENU_BAR_POINTER; // *HMENU
@@ -39,6 +38,12 @@ public:
     DWORD ROASTS;
 };
 
+struct GameFunctionsAddressTable
+{ //abstract structure for JJ2 functions addresses
+    virtual void f() = 0;  // pure virtual
+    DWORD SEND_MESSAGE; 
+};
+
 
 //============================================//
 //          Version specific Tables           //
@@ -61,6 +66,15 @@ public:
     PlayerPropertiesOffsetsTableTSF();
 };
 
+struct GameFunctionsAddressTableTSF : GameFunctionsAddressTable
+{
+    void f() override {}   // non-pure virtual
+
+public:
+    GameFunctionsAddressTableTSF();
+
+};
+
 
 //1.23
 
@@ -76,6 +90,15 @@ struct PlayerPropertiesOffsetsTableV23 : PlayerPropertiesOffsetsTable
 {
 public:
     PlayerPropertiesOffsetsTableV23();
+};
+
+struct GameFunctionsAddressTableV23 : GameFunctionsAddressTable
+{
+    void f() override {}   // non-pure virtual
+
+public:
+    GameFunctionsAddressTableV23();
+
 };
 
 #endif //ADDRESSES_TABLE_H

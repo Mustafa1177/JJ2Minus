@@ -9,6 +9,7 @@ namespace Minus
 {
 	extern GameAddressTable* addrTable;
 	extern PlayerPropertiesOffsetsTable* playOffstTable;
+	extern GameFunctionsAddressTable* funcAddrTable;
 	extern HANDLE hCurrentProcess;
 	extern DWORD plusBaseAddress;
 	

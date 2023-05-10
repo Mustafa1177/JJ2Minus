@@ -3,6 +3,6 @@
 
 bool RemoveMenuBar();
 
-void SendMessage();
+void SendChatMessage(char* msg);
 
 #endif
