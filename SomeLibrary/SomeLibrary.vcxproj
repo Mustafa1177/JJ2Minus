@@ -144,7 +144,9 @@
   <ItemGroup>
     <ClInclude Include="addresses_table.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="jjvariables.h" />
     <ClInclude Include="minus.h" />
+    <ClInclude Include="minus_fixes.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="SomeLibrary.h" />
@@ -152,6 +154,7 @@
   <ItemGroup>
     <ClCompile Include="addresses_table.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="jjvariables.cpp" />
     <ClCompile Include="minus.cpp" />
     <ClCompile Include="minus_fixes.cpp" />
     <ClCompile Include="minus_functions.cpp" />

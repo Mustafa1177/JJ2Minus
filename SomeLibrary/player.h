@@ -10,7 +10,7 @@ public:
     char* name[24];
     int myNum;
   
-    void init(int playerID, GameAddressTable& gTbl, PlayerOffsetsTable& pTbl);
+    void init(int playerID, GameAddressTable& gTbl, PlayerPropertiesOffsetsTable& pTbl);
 
 private:
     int playerID = 0;

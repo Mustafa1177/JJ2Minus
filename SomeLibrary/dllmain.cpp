@@ -5,11 +5,12 @@
 #include "minus.h"
 #include "addresses_table.h"
 #include "player.h"
+#include "minus_fixes.h"
 
 DWORD WINAPI MainThread(LPVOID param)
 {
 	GameAddressTable* addrTable = new GameAddressTableTSF();
-	PlayerOffsetsTable* playOffstTable = new PlayerOffsetsTableTSF();
+	PlayerPropertiesOffsetsTable* playOffstTable = new PlayerPropertiesOffsetsTableTSF();
 	Player player1;
 	player1.init(0, *addrTable, *playOffstTable);
 
@@ -20,6 +21,7 @@ DWORD WINAPI MainThread(LPVOID param)
 			player1Hp = (int*)0x005C853E;
 			//*player1Hp = 0;
 			*player1.health = 0;
+			MinusFixes::ChangeDefaultNetUpdateRate(10, 10);
 		}
 		Sleep(8);
 	}

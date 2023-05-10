@@ -9,17 +9,19 @@ struct GameAddressTable
 { //abstract structure for global addresses
     virtual void f() = 0;  // pure virtual
 
-public:
     int PLAYER_STRUCT_SIZE;
     DWORD PLAYERS_ARRAY;
     DWORD MAX_SCORE;  
     DWORD GAME_MODE;
     DWORD SERVER_NAME;
     DWORD GAME_TICKS;
+
+    //Code Segment
+    DWORD NET_DEF_INTERNET_UPDATE_DELAY; //byte
 };
 
 
-struct PlayerOffsetsTable
+struct PlayerPropertiesOffsetsTable
 { //abstract structure for offsets of player properties relative to player start address
 
 public:
@@ -51,10 +53,10 @@ public:
 
 };
 
-struct PlayerOffsetsTableTSF : PlayerOffsetsTable
+struct PlayerPropertiesOffsetsTableTSF : PlayerPropertiesOffsetsTable
 {
 public:
-    PlayerOffsetsTableTSF();
+    PlayerPropertiesOffsetsTableTSF();
 };
 
 
@@ -68,10 +70,10 @@ public:
     GameAddressTableV23();
 };
 
-struct PlayerOffsetsTableV23 : PlayerOffsetsTable
+struct PlayerPropertiesOffsetsTableV23 : PlayerPropertiesOffsetsTable
 {
 public:
-    PlayerOffsetsTableV23();
+    PlayerPropertiesOffsetsTableV23();
 };
 
 #endif //ADDRESSES_TABLE_H

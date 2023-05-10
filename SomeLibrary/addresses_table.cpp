@@ -12,10 +12,11 @@ GameAddressTableTSF::GameAddressTableTSF()
 	GAME_MODE = 0x005C8188;
 	SERVER_NAME = 0x0061E7A8;
 	GAME_TICKS = 0x0;
+	NET_DEF_INTERNET_UPDATE_DELAY = 0x00486295;
 	PLAYER_STRUCT_SIZE = 1444;
 }
 
-PlayerOffsetsTableTSF::PlayerOffsetsTableTSF() 
+PlayerPropertiesOffsetsTableTSF::PlayerPropertiesOffsetsTableTSF()
 {
 	HEALTH = 62; // 0x3E
 	NAME = 72;
@@ -33,7 +34,7 @@ GameAddressTableV23::GameAddressTableV23()
 	PLAYER_STRUCT_SIZE = 1444;
 }
 
-PlayerOffsetsTableV23::PlayerOffsetsTableV23()
+PlayerPropertiesOffsetsTableV23::PlayerPropertiesOffsetsTableV23()
 {
 
 }

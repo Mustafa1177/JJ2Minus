@@ -3,7 +3,7 @@
 #include "addresses_table.h"
 
 
-void Player::init(int playerID, GameAddressTable& gTbl, PlayerOffsetsTable& pTbl)
+void Player::init(int playerID, GameAddressTable& gTbl, PlayerPropertiesOffsetsTable& pTbl)
 {
     //Find player in game module memory
     DWORD addr;
