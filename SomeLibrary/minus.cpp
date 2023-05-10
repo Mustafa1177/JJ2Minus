@@ -1,6 +1,7 @@
 #include "pch.h" // use stdafx.h in Visual Studio 2017 and earlier
 #include "windows.h"
 #include "addresses_table.h"
+#include "jjvariables.h"
 #include "player.h"
 #include "minus.h"
 #include "minus_fixes.h"
@@ -10,7 +11,7 @@ namespace Minus
 	extern GameAddressTable* addrTable = new GameAddressTableTSF();
 	extern PlayerPropertiesOffsetsTable* playOffstTable = new PlayerPropertiesOffsetsTableTSF();
 	extern HANDLE hCurrentProcess = 0;
-
+	extern DWORD plusBaseAddress = 0;
 
 	void MemoryWrite(LPVOID address, unsigned char data)
 	{
@@ -27,11 +28,20 @@ namespace Minus
 	
 	bool init()
 	{
+		bool res = true;
 		DWORD proccess_ID = GetCurrentProcessId();
-		hCurrentProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, proccess_ID);
+		hCurrentProcess = OpenProcess(PROCESS_VM_OPERATION | PROCESS_VM_READ | PROCESS_VM_WRITE, FALSE, proccess_ID);
+		if(!hCurrentProcess)
+			MessageBoxA(NULL, "Error cannot OpenProcess!", "Error", MB_OK + MB_ICONERROR);
 		addrTable = new GameAddressTableTSF();
 		playOffstTable = new PlayerPropertiesOffsetsTableTSF();
-		return patchInitialize();
+		//Learning();
+		if (!JJVariables::init(*addrTable))
+			res = false;
+		if (!patchInitialize())
+			res = false;
+		CloseHandle(hCurrentProcess);
+		return res;
 	}
 	
 	bool patchInitialize()
@@ -40,4 +50,20 @@ namespace Minus
 		MinusFixes::ChangeDefaultNetUpdateRate(28, 14);
 		return true;
 	}
+
+	void Learning() 
+	{
+		//HWND *pGameWindow = (HWND*)addrTable->GAME_WINDOW_POINTER;
+		HWND hGameWindow = *JJVariables::pGameWindow;
+		//HWND hGameWindow = (HWND)0x004F33FC;
+		HMENU hGameMenuBar = *JJVariables::pGameMenuBar;
+		
+		CreatePopupMenu();
+		AppendMenuA(hGameMenuBar, 0, 0, "Minus Test");
+		//SetMenu(hGameWindow, NULL);
+		
+	}
+
+
+
 }

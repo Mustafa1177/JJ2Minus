@@ -147,6 +147,7 @@
     <ClInclude Include="jjvariables.h" />
     <ClInclude Include="minus.h" />
     <ClInclude Include="minus_fixes.h" />
+    <ClInclude Include="minus_functions.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="SomeLibrary.h" />

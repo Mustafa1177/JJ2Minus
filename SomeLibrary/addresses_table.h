@@ -10,6 +10,8 @@ struct GameAddressTable
     virtual void f() = 0;  // pure virtual
 
     int PLAYER_STRUCT_SIZE;
+    DWORD GAME_WINDOW_POINTER; // *HWND
+    DWORD GAME_MENU_BAR_POINTER; // *HMENU
     DWORD PLAYERS_ARRAY;
     DWORD MAX_SCORE;  
     DWORD GAME_MODE;

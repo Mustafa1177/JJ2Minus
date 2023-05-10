@@ -39,6 +39,9 @@
     <ClInclude Include="minus_fixes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="minus_functions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">

@@ -10,11 +10,19 @@ namespace Minus
 	extern GameAddressTable* addrTable;
 	extern PlayerPropertiesOffsetsTable* playOffstTable;
 	extern HANDLE hCurrentProcess;
-
+	extern DWORD plusBaseAddress;
+	
+	/// <summary>Writes a byte to current process memory</summary>
 	void MemoryWrite(LPVOID address, unsigned char data);
 
+	/// <summary>This function is called on startup to initialize JJ2Minus</summary>
+	/// <returns>returns true if successful</returns>
 	bool init();
 
+	/// <summary>This function is called on startup to setup jump points</summary>
+	/// <returns>returns true if successful</returns>
 	bool patchInitialize();
+
+	void Learning();
 }
 #endif

@@ -7,6 +7,8 @@ ADDRESSES_TABLE_H::GameAddressTableTSF;
 //v1.24 (TSF) section
 GameAddressTableTSF::GameAddressTableTSF()
 {
+	GAME_WINDOW_POINTER = 0x004F33FC;
+	GAME_MENU_BAR_POINTER = 0x004F341C;
 	PLAYERS_ARRAY = 0x005C8500;
 	MAX_SCORE = 0x005F37F0;
 	GAME_MODE = 0x005C8188;
@@ -26,6 +28,8 @@ PlayerPropertiesOffsetsTableTSF::PlayerPropertiesOffsetsTableTSF()
 //v1.23 section
 GameAddressTableV23::GameAddressTableV23()
 {
+	GAME_WINDOW_POINTER = 0x004F8E1C;
+	GAME_MENU_BAR_POINTER = 0x004F8E44;
 	PLAYERS_ARRAY = 0x0;
 	MAX_SCORE = 0x005D01D0;
 	GAME_MODE = 0x005A4B68;

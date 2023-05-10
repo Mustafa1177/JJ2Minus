@@ -6,6 +6,7 @@
 #include "addresses_table.h"
 #include "player.h"
 #include "minus_fixes.h"
+#include "minus_functions.h"
 
 
 
@@ -20,14 +21,16 @@ DWORD WINAPI MainThread(LPVOID param)
 
 	while (true) {
 		if (GetAsyncKeyState(VK_F2) & 0x80000) {
-			//MessageBoxA(NULL, "F6 pressed!", "Minus", MB_OK);
+			
 			int* player1Hp;
 			player1Hp = (int*)0x005C853E;
 			//*player1Hp = 0;
 			//*player1.health = 0;
-			MinusFixes::ChangeDefaultNetUpdateRate(10, 10);
 
+			//RemoveMenuBar();
+			Minus::Learning();
 			//CloseHandle(hProcess);
+			MessageBoxA(NULL, "F6 pressed!", "Minus", MB_OK);
 		}
 		Sleep(8);
 	}
