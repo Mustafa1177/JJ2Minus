@@ -88,11 +88,11 @@
       <EnableUAC>false</EnableUAC>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>start "" "F:\Games\Jazz2\Jazz2Dev.exe" -server -battle battle1.j2l</Command>
     </PostBuildEvent>
     <CustomBuildStep>
-      <Command>start "" "F:\Games\Jazz2\Jazz2Dev.exe" -server -battle battle1.j2l</Command>
+      <Command>
+      </Command>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
