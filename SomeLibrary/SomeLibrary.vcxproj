@@ -160,6 +160,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="SomeLibrary.h" />
+    <ClInclude Include="util.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="addresses_table.cpp" />
@@ -177,6 +178,7 @@
     </ClCompile>
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SomeLibrary.cpp" />
+    <ClCompile Include="util.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

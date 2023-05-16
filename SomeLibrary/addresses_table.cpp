@@ -1,8 +1,6 @@
 #include "pch.h"
 #include "addresses_table.h"
 
-ADDRESSES_TABLE_H::GameAddressTableTSF;
-
 //v1.24 (TSF) section
 GameAddressTableTSF::GameAddressTableTSF()
 {

@@ -1,7 +1,8 @@
 #pragma once
 
-#define IDM_CUSTOM_MENU_ITEM   16325
-#define IDM_CUSTOM_MENU_ITEM_2 16326
+#define IDM_OPEN_INI   16325
+#define IDM_RELOAD_INI 16326
+#define IDM_TEST       16327
 
 typedef void (*MenuItemHandler)();
 

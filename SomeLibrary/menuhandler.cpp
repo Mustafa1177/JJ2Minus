@@ -1,9 +1,13 @@
 #include "pch.h"
 #include "menuhandler.h"
 #include "jjvariables.h"
+#include "minus.cpp"
 
-#include "stdio.h"
+#include <cstdlib>
 #include <windows.h>
+#include <stdio.h>
+#include <direct.h>
+
 #include "libs/detours/detours.h"
 
 bool hooked = false;
@@ -17,15 +21,15 @@ LRESULT CALLBACK MyWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
         DrawMenuBar(*JJVariables::pGameWindow);
 
-        if (menuItemID == IDM_CUSTOM_MENU_ITEM)
+        if (menuItemID == IDM_OPEN_INI)
         {
-            printf("Cousin, we are family!\n");
+            std::system("start /B notepad.exe minus.ini");
             return 0;
         }
 
-        if (menuItemID == IDM_CUSTOM_MENU_ITEM_2)
+        if (menuItemID == IDM_RELOAD_INI)
         {
-            printf("Of course I should be spending time with you.\n");
+            reloadConfig();
             return 0;
         }
     }
@@ -56,8 +60,9 @@ void menuHandler()
 {
     HMENU hMenu = CreateMenu();
     HMENU hSubMenu = CreatePopupMenu();
-    AppendMenu(hSubMenu, MF_STRING, IDM_CUSTOM_MENU_ITEM, "Test item 1");
-    AppendMenu(hSubMenu, MF_STRING | MF_CHECKED, IDM_CUSTOM_MENU_ITEM_2, "Test item 2");
+    AppendMenu(hSubMenu, MF_STRING, IDM_OPEN_INI, "Open minus.ini");
+    AppendMenu(hSubMenu, MF_STRING, IDM_RELOAD_INI, "Reload minus.ini");
+    AppendMenu(hSubMenu, MF_STRING | MF_CHECKED, IDM_TEST, "Test item 2");
 
     AppendMenu(hMenu, MF_POPUP, (UINT_PTR)hSubMenu, "Minus");
 

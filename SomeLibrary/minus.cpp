@@ -10,10 +10,18 @@
 #include "minus_functions.h"
 #include "menuhandler.h"
 #include "libs/inireader/INIreader.hpp"
+#include "util.h"
+
+INIReader config(getCCWD() + "/minus.ini");
+static void reloadConfig() {
+	MinusFixes::ChangeDefaultNetUpdateRate(
+		static_cast<char>(config.GetInteger("Network", "NetUpdateRate", 28)),
+		static_cast<char>(config.GetInteger("Network", "LanUpdateRate", 14))
+	);
+}
 
 namespace Minus
 {
-	INIReader config("minus.ini");
 	extern GameAddressTable* addrTable = new GameAddressTableTSF();
 	extern PlayerPropertiesOffsetsTable* playOffstTable = new PlayerPropertiesOffsetsTableTSF();
 	extern GameFunctionsAddressTable* funcAddrTable = new GameFunctionsAddressTableTSF();
@@ -53,10 +61,7 @@ namespace Minus
 		playOffstTable = new PlayerPropertiesOffsetsTableTSF();
 		funcAddrTable = new GameFunctionsAddressTableTSF();
 		
-		MinusFixes::ChangeDefaultNetUpdateRate(
-			static_cast<char>(config.GetInteger("Network", "NetUpdateRate", 28)),
-			static_cast<char>(config.GetInteger("Network", "LanUpdateRate", 14))
-		);
+		reloadConfig();
 
 		bool res = (!JJVariables::init(*addrTable)) || (!patchInitialize());
 
