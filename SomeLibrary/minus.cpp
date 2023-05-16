@@ -6,6 +6,7 @@
 #include "minus.h"
 #include "minus_fixes.h"
 #include "minus_functions.h"
+#include <cstdio>
 
 namespace Minus 
 {
@@ -20,37 +21,46 @@ namespace Minus
 		DWORD dataSize = sizeof(data);
 		if (WriteProcessMemory(hCurrentProcess, address, &data, dataSize, NULL)) // newdatasize = 4 byte
 		{
-			//MessageBoxA(NULL, "WriteProcessMemory worked.", "Success", MB_OK + MB_ICONINFORMATION);
+			// printf("[INFO] WriteProcessMemory worked!\n");
 		}
 		else
 		{
-			MessageBoxA(NULL, "Error cannot WriteProcessMemory!", "Error", MB_OK + MB_ICONERROR);
+			printf("[ERROR] WriteProcessMemory failed!\n");
 		}
 	}
 	
 	bool init()
 	{
+		AllocConsole();
+		FILE* f = new FILE();
+		freopen_s(&f, "CONOUT$", "w", stdout);
+
+		printf("[INFO] Running!\n");
+
 		bool res = true;
 		DWORD proccess_ID = GetCurrentProcessId();
 		hCurrentProcess = OpenProcess(PROCESS_VM_OPERATION | PROCESS_VM_READ | PROCESS_VM_WRITE, FALSE, proccess_ID);
-		if(!hCurrentProcess)
-			MessageBoxA(NULL, "Error cannot OpenProcess!", "Error", MB_OK + MB_ICONERROR);
+		
+		if (!hCurrentProcess)
+			printf("[ERROR] OpenProcess failed!\n");
+		
 		addrTable = new GameAddressTableTSF();
 		playOffstTable = new PlayerPropertiesOffsetsTableTSF();
 		funcAddrTable = new GameFunctionsAddressTableTSF();
-		//Learning();
-		if (!JJVariables::init(*addrTable))
-			res = false;
-		if (!patchInitialize())
-			res = false;
+		
+		res = (!JJVariables::init(*addrTable)) || (!patchInitialize());
+
 		CloseHandle(hCurrentProcess);
+
 		return res;
 	}
 	
 	bool patchInitialize()
 	{
-		MessageBoxA(NULL, "DLL STARTED!", "DLL STARTED", MB_OK);
+		printf("[INFO] The minus DLL has started!");
+
 		MinusFixes::ChangeDefaultNetUpdateRate(28, 14);
+
 		return true;
 	}
 
