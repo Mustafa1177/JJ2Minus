@@ -1,12 +1,14 @@
 #include "pch.h" // use stdafx.h in Visual Studio 2017 and earlier
 #include "windows.h"
+#include <cstdio>
+
 #include "addresses_table.h"
 #include "jjvariables.h"
 #include "player.h"
 #include "minus.h"
 #include "minus_fixes.h"
 #include "minus_functions.h"
-#include <cstdio>
+#include "menuhandler.h"
 
 namespace Minus 
 {
@@ -19,6 +21,7 @@ namespace Minus
 	void MemoryWrite(LPVOID address, unsigned char data)
 	{
 		DWORD dataSize = sizeof(data);
+
 		if (WriteProcessMemory(hCurrentProcess, address, &data, dataSize, NULL)) // newdatasize = 4 byte
 		{
 			// printf("[INFO] WriteProcessMemory worked!\n");
@@ -31,14 +34,15 @@ namespace Minus
 	
 	bool init()
 	{
+		bool res = true;
+		DWORD proccess_ID = GetCurrentProcessId();
+
 		AllocConsole();
 		FILE* f = new FILE();
 		freopen_s(&f, "CONOUT$", "w", stdout);
 
 		printf("[INFO] Running!\n");
 
-		bool res = true;
-		DWORD proccess_ID = GetCurrentProcessId();
 		hCurrentProcess = OpenProcess(PROCESS_VM_OPERATION | PROCESS_VM_READ | PROCESS_VM_WRITE, FALSE, proccess_ID);
 		
 		if (!hCurrentProcess)
@@ -70,12 +74,6 @@ namespace Minus
 
 		SendChatMessage(msg);
 
-		HWND hGameWindow = *JJVariables::pGameWindow;
-		HMENU hGameMenuBar = *JJVariables::pGameMenuBar;
-		
-		//CreatePopupMenu();
-		AppendMenuA(hGameMenuBar, 0, 0, "Minus Test");
-		DrawMenuBar(hGameWindow);
-		//SetMenu(hGameWindow, NULL);
+		menuHandler();
 	}
 }

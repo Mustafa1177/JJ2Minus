@@ -152,6 +152,7 @@
     <ClInclude Include="addresses_table.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="jjvariables.h" />
+    <ClInclude Include="menuhandler.h" />
     <ClInclude Include="minus.h" />
     <ClInclude Include="minus_fixes.h" />
     <ClInclude Include="minus_functions.h" />
@@ -163,6 +164,7 @@
     <ClCompile Include="addresses_table.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="jjvariables.cpp" />
+    <ClCompile Include="menuhandler.cpp" />
     <ClCompile Include="minus.cpp" />
     <ClCompile Include="minus_fixes.cpp" />
     <ClCompile Include="minus_functions.cpp" />

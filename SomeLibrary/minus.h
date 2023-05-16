@@ -24,6 +24,7 @@ namespace Minus
 	/// <returns>returns true if successful</returns>
 	bool patchInitialize();
 
+	/// <summary>This function is used for testing the main features</summary>
 	void Learning();
 }
 #endif
