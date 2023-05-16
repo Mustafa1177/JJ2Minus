@@ -17,7 +17,7 @@ https://www.jazz2online.com/wiki/List_of_Jazz_Jackrabbit_2_Memory_Addresses
 
 ![image](https://github.com/Mustafa1177/MinusTemp/assets/88726201/ea58eae9-e2e1-4f66-a033-90a8314afe1d)
 
-4- Go add an external pointer to the game variable inside the file "jjvariables.h" with the right type so that we can access it from other files.
+4- Go add an external pointer to the game variable inside the file "jjvariables.h" so that we can access it from other files.
 
 ![image](https://github.com/Mustafa1177/MinusTemp/assets/88726201/73279272-8cb0-4945-b4aa-60e8f5c75e54)
 
