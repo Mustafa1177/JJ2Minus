@@ -21,7 +21,7 @@ https://www.jazz2online.com/wiki/List_of_Jazz_Jackrabbit_2_Memory_Addresses
 
 ![image](https://github.com/Mustafa1177/MinusTemp/assets/88726201/73279272-8cb0-4945-b4aa-60e8f5c75e54)
 
-5- Now, we need to assign the address we added previously as the value for the pointer we defined last step. We will accomplish that using the "init" function inside the file "jjvariables.cpp". The "init" function is called at the start of the program which lets us assign the addresses to the pointers.
+5- Now, we need to assign the address we added previously as the value for the pointer we defined last step. We will accomplish this using the "init" function inside the file "jjvariables.cpp". The "init" function is called at the start of the program which lets us assign the addresses to the pointers.
 
 ![image](https://github.com/Mustafa1177/MinusTemp/assets/88726201/b30a23e6-1ad0-4f2b-bd97-f7eea987eb95)
 
