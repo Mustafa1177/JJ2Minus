@@ -61,10 +61,13 @@ void menuHandler()
     HMENU hSubMenu = CreatePopupMenu();
     AppendMenu(hSubMenu, MF_STRING, IDM_OPEN_INI, "Open minus.ini");
     AppendMenu(hSubMenu, MF_STRING, IDM_RELOAD_INI, "Reload minus.ini");
-    AppendMenu(hSubMenu, MF_STRING | MF_CHECKED, IDM_TEST, "Test item 2");
+    AppendMenu(hSubMenu, MF_STRING | MF_CHECKED, IDM_TEST, "Test item 3");
+    AppendMenu(hMenu, MF_POPUP, (UINT_PTR)hSubMenu, "Minus");
 
     HWND hWnd = *JJVariables::pGameWindow;
     SetMenu(hWnd, hMenu);
+
+    printf("Menu has been set\n");
 
     if (!hooked && !HookWindowProcedure(hWnd))
     {

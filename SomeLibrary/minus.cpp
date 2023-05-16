@@ -80,9 +80,9 @@ namespace Minus
 
 	void Learning() 
 	{
-		char msg[] = "Hello World!\0";
+		// char msg[] = "Hello World!\0";
 
-		SendChatMessage(msg);
+		// SendChatMessage(msg);
 		menuHandler();
 	}
 }
