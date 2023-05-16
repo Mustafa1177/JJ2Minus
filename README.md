@@ -26,6 +26,7 @@ https://www.jazz2online.com/wiki/List_of_Jazz_Jackrabbit_2_Memory_Addresses
 ![image](https://github.com/Mustafa1177/MinusTemp/assets/88726201/b30a23e6-1ad0-4f2b-bd97-f7eea987eb95)
 
 6- Now we have everything set up! You can now read/write the value of the variable by using the poiter we added:
+
 *JJVariables::GameMode = 2;*
 Don't forget to include the "jjvariables.h" header file.
 
