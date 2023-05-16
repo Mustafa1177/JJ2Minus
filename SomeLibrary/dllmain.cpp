@@ -8,10 +8,6 @@
 #include "minus_fixes.h"
 #include "minus_functions.h"
 
-
-
-
-
 DWORD WINAPI MainThread(LPVOID param)
 {
 	GameAddressTable* addrTable = new GameAddressTableTSF();
@@ -30,7 +26,7 @@ DWORD WINAPI MainThread(LPVOID param)
 			//RemoveMenuBar();
 			Minus::Learning();
 			//CloseHandle(hProcess);
-			MessageBoxA(NULL, "F6 pressed!", "Minus", MB_OK);
+			MessageBoxA(NULL, "F2 pressed!", "Minus", MB_OK);
 		}
 		Sleep(8);
 	}
@@ -38,7 +34,7 @@ DWORD WINAPI MainThread(LPVOID param)
 	return 0;
 }
 
-BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved)
+BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 {
 	switch (ul_reason_for_call)
 	{

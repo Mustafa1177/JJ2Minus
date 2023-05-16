@@ -4,10 +4,9 @@
 typedef struct IUnknown IUnknown;
 
 #include <iostream>
-#include "SomeLibrary.h"
-#include "windows.h"
+#include "../SomeLibrary/SomeLibrary.h"
+#include <windows.h>
 #include <TlHelp32.h>
-
 
 int getProcId(const wchar_t* target) {
 	DWORD pID = 0;
@@ -48,9 +47,6 @@ int main(int argc, char* argv[])
 
 	injectDll(argv);
 	std::cout << "haha" << std::endl;
-
-
-
 
 	const wchar_t* process = L"Jazz2.exe"; // name of the process to inject into 
 	int pID = getProcId(process);

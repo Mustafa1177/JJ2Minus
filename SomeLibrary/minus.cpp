@@ -15,7 +15,6 @@ namespace Minus
 	extern HANDLE hCurrentProcess = 0;
 	extern DWORD plusBaseAddress = 0;
 
-
 	void MemoryWrite(LPVOID address, unsigned char data)
 	{
 		DWORD dataSize = sizeof(data);
@@ -59,30 +58,14 @@ namespace Minus
 	{
 		char msg[] = "Hello World!\0";
 
-		typedef void func(char*);
-		func* f = (func*)funcAddrTable->SEND_MESSAGE;
-		//f(msg);
-
-
-		void (*myfunc)(char*);
-		myfunc = (void (*)(char*))0x4833A0;  //my leet version of address
-		
-		//myfunc(msg);
-	
 		SendChatMessage(msg);
 
-
 		HWND hGameWindow = *JJVariables::pGameWindow;
-
 		HMENU hGameMenuBar = *JJVariables::pGameMenuBar;
 		
 		//CreatePopupMenu();
 		AppendMenuA(hGameMenuBar, 0, 0, "Minus Test");
 		DrawMenuBar(hGameWindow);
 		//SetMenu(hGameWindow, NULL);
-		
 	}
-
-
-
 }
