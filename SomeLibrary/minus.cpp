@@ -1,19 +1,20 @@
 #include "pch.h" // use stdafx.h in Visual Studio 2017 and earlier
-#include "windows.h"
-#include <cstdio>
-
-#include "addresses_table.h"
-#include "jjvariables.h"
-#include "player.h"
 #include "minus.h"
-#include "minus_fixes.h"
-#include "minus_functions.h"
-#include "menuhandler.h"
 #include "libs/inireader/INIreader.hpp"
-#include "util.h"
 
-INIReader config(getCCWD() + "/minus.ini");
-static void reloadConfig() {
+std::string getCCWD() {
+	char cwd[1024];
+
+	if (_getcwd(cwd, sizeof(cwd)) != nullptr) {
+		return std::string(cwd);
+	}
+
+	return ".";
+}
+
+extern INIReader config(getCCWD() + "/minus.ini");
+
+void reloadConfig() {
 	MinusFixes::ChangeDefaultNetUpdateRate(
 		static_cast<char>(config.GetInteger("Network", "NetUpdateRate", 28)),
 		static_cast<char>(config.GetInteger("Network", "LanUpdateRate", 14))
@@ -72,7 +73,7 @@ namespace Minus
 	
 	bool patchInitialize()
 	{
-		printf("[INFO] The minus DLL has started!");
+		printf("[INFO] The minus DLL has started!\n");
 
 		return true;
 	}

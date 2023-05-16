@@ -49,7 +49,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 	case DLL_PROCESS_ATTACH:
 		Minus::init(); //call minus.cpp
 		CreateThread(0, 0, MainThread, hModule, 0, 0);
-		printf("\n[INFO] Minus has fully loaded!\n");
+		printf("[INFO] Minus has fully loaded!\n");
 
 		/*int* player1Hp;
 		player1Hp = (int*)0x005C853E;

@@ -1,16 +1,13 @@
 #include "pch.h"
 #include "menuhandler.h"
 #include "jjvariables.h"
-#include "minus.cpp"
 
 #include <cstdlib>
 #include <windows.h>
-#include <stdio.h>
-#include <direct.h>
-
 #include "libs/detours/detours.h"
+#include "minus.h"
 
-bool hooked = false;
+typedef void (*MenuItemHandler)();
 WNDPROC g_pOriginalWndProc = NULL;
 
 LRESULT CALLBACK MyWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -56,6 +53,8 @@ BOOL HookWindowProcedure(HWND hWnd)
     return TRUE;
 }
 
+bool hooked = false;
+
 void menuHandler()
 {
     HMENU hMenu = CreateMenu();
@@ -63,8 +62,6 @@ void menuHandler()
     AppendMenu(hSubMenu, MF_STRING, IDM_OPEN_INI, "Open minus.ini");
     AppendMenu(hSubMenu, MF_STRING, IDM_RELOAD_INI, "Reload minus.ini");
     AppendMenu(hSubMenu, MF_STRING | MF_CHECKED, IDM_TEST, "Test item 2");
-
-    AppendMenu(hMenu, MF_POPUP, (UINT_PTR)hSubMenu, "Minus");
 
     HWND hWnd = *JJVariables::pGameWindow;
     SetMenu(hWnd, hMenu);

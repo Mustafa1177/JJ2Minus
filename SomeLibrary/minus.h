@@ -2,8 +2,21 @@
 #define MINUS_H
 
 #include "pch.h" // use stdafx.h in Visual Studio 2017 and earlier
-#include "windows.h"
+#include <windows.h>
+#include <direct.h>
+#include <string>
+#include <cstdio>
+
+#include "jjvariables.h"
+#include "player.h"
+#include "minus_functions.h"
+#include "menuhandler.h"
 #include "addresses_table.h"
+#include "minus_fixes.h"
+
+std::string getCCWD();
+
+void reloadConfig();
 
 namespace Minus
 {
