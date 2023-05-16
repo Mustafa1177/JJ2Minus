@@ -67,8 +67,6 @@ void menuHandler()
     HWND hWnd = *JJVariables::pGameWindow;
     SetMenu(hWnd, hMenu);
 
-    printf("Menu has been set\n");
-
     if (!hooked && !HookWindowProcedure(hWnd))
     {
         printf("[ERROR] [MENU] Failed to hook the window procedure\n");
