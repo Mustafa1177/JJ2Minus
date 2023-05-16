@@ -36,7 +36,6 @@ DWORD WINAPI MainThread(LPVOID param)
 			wasKeyPressed = false;
 		}
 
-		DrawMenuBar(*JJVariables::pGameWindow);
 		Sleep(8);
 	}
 	

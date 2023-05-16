@@ -4,12 +4,9 @@
 
 #include "stdio.h"
 #include <windows.h>
-#include "detours/src/detours.h"
+#include "libs/detours/detours.h"
 
-#define IDM_CUSTOM_MENU_ITEM   16325
-#define IDM_CUSTOM_MENU_ITEM_2 16326
-
-typedef void (*MenuItemHandler)();
+bool hooked = false;
 WNDPROC g_pOriginalWndProc = NULL;
 
 LRESULT CALLBACK MyWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -18,7 +15,7 @@ LRESULT CALLBACK MyWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     {
         WORD menuItemID = LOWORD(wParam);
 
-        printf("How about we go BOWLING?\n");
+        DrawMenuBar(*JJVariables::pGameWindow);
 
         if (menuItemID == IDM_CUSTOM_MENU_ITEM)
         {
@@ -55,14 +52,13 @@ BOOL HookWindowProcedure(HWND hWnd)
     return TRUE;
 }
 
-bool hooked = false;
-
 void menuHandler()
 {
     HMENU hMenu = CreateMenu();
     HMENU hSubMenu = CreatePopupMenu();
     AppendMenu(hSubMenu, MF_STRING, IDM_CUSTOM_MENU_ITEM, "Test item 1");
-    AppendMenu(hSubMenu, MF_STRING, IDM_CUSTOM_MENU_ITEM_2, "Test item 2");
+    AppendMenu(hSubMenu, MF_STRING | MF_CHECKED, IDM_CUSTOM_MENU_ITEM_2, "Test item 2");
+
     AppendMenu(hMenu, MF_POPUP, (UINT_PTR)hSubMenu, "Minus");
 
     HWND hWnd = *JJVariables::pGameWindow;
@@ -70,13 +66,15 @@ void menuHandler()
 
     if (!hooked && !HookWindowProcedure(hWnd))
     {
-        printf("fucked up\n");
+        printf("[ERROR] [MENU] Failed to hook the window procedure\n");
         return;
     }
 
-    printf("yippee\n");
+    printf("[INFO] [MENU] Window procedure got hooked sucessfully!\n");
 
     hooked = true;
+
+    DrawMenuBar(*JJVariables::pGameWindow);
 }
 
 void killMenu()

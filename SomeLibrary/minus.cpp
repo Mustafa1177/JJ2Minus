@@ -9,9 +9,11 @@
 #include "minus_fixes.h"
 #include "minus_functions.h"
 #include "menuhandler.h"
+#include "libs/inireader/INIreader.hpp"
 
-namespace Minus 
+namespace Minus
 {
+	INIReader config("minus.ini");
 	extern GameAddressTable* addrTable = new GameAddressTableTSF();
 	extern PlayerPropertiesOffsetsTable* playOffstTable = new PlayerPropertiesOffsetsTableTSF();
 	extern GameFunctionsAddressTable* funcAddrTable = new GameFunctionsAddressTableTSF();
@@ -34,7 +36,6 @@ namespace Minus
 	
 	bool init()
 	{
-		bool res = true;
 		DWORD proccess_ID = GetCurrentProcessId();
 
 		AllocConsole();
@@ -52,7 +53,12 @@ namespace Minus
 		playOffstTable = new PlayerPropertiesOffsetsTableTSF();
 		funcAddrTable = new GameFunctionsAddressTableTSF();
 		
-		res = (!JJVariables::init(*addrTable)) || (!patchInitialize());
+		MinusFixes::ChangeDefaultNetUpdateRate(
+			static_cast<char>(config.GetInteger("Network", "NetUpdateRate", 28)),
+			static_cast<char>(config.GetInteger("Network", "LanUpdateRate", 14))
+		);
+
+		bool res = (!JJVariables::init(*addrTable)) || (!patchInitialize());
 
 		CloseHandle(hCurrentProcess);
 
@@ -63,8 +69,6 @@ namespace Minus
 	{
 		printf("[INFO] The minus DLL has started!");
 
-		MinusFixes::ChangeDefaultNetUpdateRate(28, 14);
-
 		return true;
 	}
 
@@ -73,7 +77,6 @@ namespace Minus
 		char msg[] = "Hello World!\0";
 
 		SendChatMessage(msg);
-
 		menuHandler();
 	}
 }
