@@ -6,6 +6,7 @@ JJ2Minus is a patch for the game jazz Jackrabbit 2
 Tutorial on adding a JJ2 variable for reading/writing.
 
 1- Find the address you want to add, you can find some game addresses in the link below:
+
 https://www.jazz2online.com/wiki/List_of_Jazz_Jackrabbit_2_Memory_Addresses
 
 2- Open the "addresses_table.h" file and define the address inside the "GameAddressTable" structure.
