@@ -10,6 +10,11 @@
 typedef void (*MenuItemHandler)();
 WNDPROC g_pOriginalWndProc = NULL;
 
+bool hooked = false;
+
+// test checkbox
+bool checkboxOn = false;
+
 LRESULT CALLBACK MyWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     if (uMsg == WM_COMMAND)
@@ -27,6 +32,12 @@ LRESULT CALLBACK MyWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         if (menuItemID == IDM_RELOAD_INI)
         {
             reloadConfig();
+            return 0;
+        }
+
+        if (menuItemID == IDM_TEST)
+        {
+            checkboxOn = !checkboxOn;
             return 0;
         }
     }
@@ -53,7 +64,6 @@ BOOL HookWindowProcedure(HWND hWnd)
     return TRUE;
 }
 
-bool hooked = false;
 
 void menuHandler()
 {
@@ -61,7 +71,7 @@ void menuHandler()
     HMENU hSubMenu = CreatePopupMenu();
     AppendMenu(hSubMenu, MF_STRING, IDM_OPEN_INI, "Open minus.ini");
     AppendMenu(hSubMenu, MF_STRING, IDM_RELOAD_INI, "Reload minus.ini");
-    AppendMenu(hSubMenu, MF_STRING | MF_CHECKED, IDM_TEST, "Test item 3");
+    AppendMenu(hSubMenu, MF_STRING | (checkboxOn ? MF_CHECKED : 0), IDM_TEST, "Test item 3");
     AppendMenu(hMenu, MF_POPUP, (UINT_PTR)hSubMenu, "Minus");
 
     HWND hWnd = *JJVariables::pGameWindow;

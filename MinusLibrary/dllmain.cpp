@@ -46,7 +46,7 @@ DWORD WINAPI MainThread(LPVOID param)
 	return 0;
 }
 
-void _InitD3D() {
+void InitDrawing() {
 	// wait for jj2 game window to open
 	std::this_thread::sleep_for(std::chrono::seconds(5));
 
@@ -58,21 +58,19 @@ void _InitD3D() {
 	}
 }
 
-void InitD3D() {
-	std::thread initializationThread(_InitD3D);
-	initializationThread.detach();
-}
-
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 {
+	std::thread initializationThread;
+	
 	switch (ul_reason_for_call)
 	{
 	case DLL_PROCESS_ATTACH:
 
-		Minus::init(); //call minus.cpp
+		Minus::init();
 		CreateThread(0, 0, MainThread, hModule, 0, 0);
 
-		InitD3D();
+		initializationThread = std::thread(InitDrawing);
+		initializationThread.detach();
 
 		printf("[INFO] Minus has fully loaded!\n");
 
