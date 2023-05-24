@@ -54,7 +54,7 @@ void InitDrawing() {
 
 	while (true) {
 		Drawing_DrawRectangle(50, 50, 100, 100);
-		std::this_thread::sleep_for(std::chrono::microseconds(0));
+		std::this_thread::sleep_for(std::chrono::microseconds(1));
 	}
 }
 
