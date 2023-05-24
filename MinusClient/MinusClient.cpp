@@ -4,7 +4,6 @@
 typedef struct IUnknown IUnknown;
 
 #include <iostream>
-#include "../SomeLibrary/SomeLibrary.h"
 #include <windows.h>
 #include <TlHelp32.h>
 
@@ -33,25 +32,12 @@ void injectDll(char* argv[]) {
 
 int main(int argc, char* argv[])
 {
-	// Initialize a Fibonacci relation sequence.
-	fibonacci_init(1, 1);
-	// Write out the sequence values until overflow.
-	do {
-		std::cout << fibonacci_index() << ": "
-			<< fibonacci_current() << std::endl;
-	} while (fibonacci_next());
-	// Report count of values written before overflow.
-	std::cout << fibonacci_index() + 1 <<
-		" Fibonacci sequence values fit in an " <<
-		"unsigned 64-bit integer." << std::endl;
-
-	injectDll(argv);
 	std::cout << "haha" << std::endl;
 
 	const wchar_t* process = L"Jazz2.exe"; // name of the process to inject into 
 	int pID = getProcId(process);
 
-	char dll[] = "SomeLibrary.dll"; // name of the dll file to inject
+	char dll[] = "MinusLibrary.dll"; // name of the dll file to inject
 	char dllPath[MAX_PATH] = { 0 }; // full path of the dll
 	GetFullPathNameA(dll, MAX_PATH, dllPath, NULL);
 

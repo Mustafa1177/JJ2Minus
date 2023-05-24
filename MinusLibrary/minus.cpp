@@ -16,8 +16,8 @@ extern INIReader config(getCCWD() + "/minus.ini");
 
 void reloadConfig() {
 	MinusFixes::ChangeDefaultNetUpdateRate(
-		static_cast<char>(config.GetInteger("Network", "NetUpdateRate", 28)),
-		static_cast<char>(config.GetInteger("Network", "LanUpdateRate", 14))
+		static_cast<char>(config.GetInteger("Network", "NetUpdateRate", 70)),
+		static_cast<char>(config.GetInteger("Network", "LanUpdateRate", 42))
 	);
 }
 

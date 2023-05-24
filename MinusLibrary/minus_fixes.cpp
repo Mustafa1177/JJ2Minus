@@ -12,6 +12,6 @@ namespace MinusFixes
 {
 	void ChangeDefaultNetUpdateRate(char internetDelay, char lanDelay) {
 		char* netDefInternetUpdateDelay = (char*)addrTable->NET_DEF_INTERNET_UPDATE_DELAY;
-		MemoryWrite((LPVOID)netDefInternetUpdateDelay, 10);
+		MemoryWrite((LPVOID)netDefInternetUpdateDelay, internetDelay);
 	}
 }
