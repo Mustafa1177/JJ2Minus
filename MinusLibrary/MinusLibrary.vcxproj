@@ -60,6 +60,8 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>start "" "F:\Games\Jazz2\Jazz2Dev.exe" -server -battle battle1.j2l</Command>
@@ -90,6 +92,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="addresses_table.h" />
+    <ClInclude Include="drawing.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="jjvariables.h" />
     <ClInclude Include="menuhandler.h" />
@@ -102,6 +105,7 @@
   <ItemGroup>
     <ClCompile Include="addresses_table.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="drawing.cpp" />
     <ClCompile Include="jjvariables.cpp" />
     <ClCompile Include="menuhandler.cpp" />
     <ClCompile Include="minus.cpp" />

@@ -12,6 +12,39 @@ std::string getCCWD() {
 	return ".";
 }
 
+// may have a memory leak, watch out :)
+const char* const DWORDToCChar(DWORD value) {
+	std::string str = std::to_string(value);
+	char* charArray = new char[str.length() + 1];
+	strcpy_s(charArray, str.length() + 1, str.c_str());
+	const char* const result = charArray;
+	return result;
+}
+
+std::string DWORDErrorMessageToString(DWORD errorCode) {
+	LPSTR messageBuffer = nullptr;
+	DWORD size = FormatMessageA(
+		FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+		nullptr,
+		errorCode,
+		MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+		reinterpret_cast<LPSTR>(&messageBuffer),
+		0,
+		nullptr
+	);
+
+	std::string errorMessage(messageBuffer, size);
+
+	LocalFree(messageBuffer);
+
+	// Remove trailing newline character
+	if (!errorMessage.empty() && errorMessage.back() == '\n') {
+		errorMessage.pop_back();
+	}
+
+	return errorMessage;
+}
+
 extern INIReader config(getCCWD() + "/minus.ini");
 
 void reloadConfig() {
@@ -29,6 +62,11 @@ namespace Minus
 	extern HANDLE hCurrentProcess = 0;
 	extern DWORD plusBaseAddress = 0;
 
+	void closeApplication()
+	{
+		CloseHandle(hCurrentProcess);
+	}
+
 	void MemoryWrite(LPVOID address, unsigned char data)
 	{
 		DWORD dataSize = sizeof(data);
@@ -39,7 +77,9 @@ namespace Minus
 		}
 		else
 		{
-			printf("[ERROR] WriteProcessMemory failed!\n");
+			_Post_equals_last_error_ DWORD e = GetLastError();
+
+			printf(("[ERROR] WriteProcessMemory failed, error message: '" + DWORDErrorMessageToString(e)  + "'\n").c_str());
 		}
 	}
 	
@@ -65,8 +105,6 @@ namespace Minus
 		reloadConfig();
 
 		bool res = (!JJVariables::init(*addrTable)) || (!patchInitialize());
-
-		CloseHandle(hCurrentProcess);
 
 		return res;
 	}

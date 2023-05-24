@@ -42,6 +42,9 @@
     <ClInclude Include="menuhandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="drawing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -69,6 +72,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="menuhandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="drawing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
