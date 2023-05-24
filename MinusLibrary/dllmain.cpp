@@ -50,12 +50,14 @@ void InitDrawing() {
 	// wait for jj2 game window to open
 	std::this_thread::sleep_for(std::chrono::seconds(5));
 
+	/*
 	Drawing_InitDrawing();
 
 	while (true) {
 		Drawing_DrawRectangle(50, 50, 100, 100);
 		std::this_thread::sleep_for(std::chrono::microseconds(1));
 	}
+	*/
 }
 
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
@@ -67,12 +69,15 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 	case DLL_PROCESS_ATTACH:
 
 		Minus::init();
+
 		CreateThread(0, 0, MainThread, hModule, 0, 0);
 
 		initializationThread = std::thread(InitDrawing);
 		initializationThread.detach();
 
 		printf("[INFO] Minus has fully loaded!\n");
+
+		LoadLibraryA("plus.dll");
 
 		/*
 		int* player1Hp;
