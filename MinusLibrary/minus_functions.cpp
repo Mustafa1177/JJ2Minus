@@ -5,6 +5,8 @@
 
 using namespace Minus;
 
+typedef void JJ2SendChatMessageFunction(char*);
+
 bool RemoveMenuBar() 
 {
 	HWND hGameWindow = *JJVariables::pGameWindow;
@@ -13,7 +15,7 @@ bool RemoveMenuBar()
 
 void SendChatMessage(char* msg)
 {
-	void (*myfunc)(char*);
-	myfunc = (void (*)(char*))funcAddrTable->SEND_MESSAGE;
-	myfunc(msg);
+	void (*function)(char*);
+	function = (JJ2SendChatMessageFunction*)funcAddrTable->SEND_MESSAGE;
+	function(msg);
 }

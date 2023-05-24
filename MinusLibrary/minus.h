@@ -1,9 +1,21 @@
-#ifndef MINUS_H    // To make sure you don't declare the function more than once by including the header multiple times.
-#define MINUS_H
+#pragma once
 
 #include "pch.h" // use stdafx.h in Visual Studio 2017 and earlier
-#include "windows.h"
+#include <windows.h>
+#include <direct.h>
+#include <string>
+#include <cstdio>
+
+#include "jjvariables.h"
+#include "player.h"
+#include "minus_functions.h"
+#include "menuhandler.h"
 #include "addresses_table.h"
+#include "minus_fixes.h"
+
+std::string getCCWD();
+
+void reloadConfig();
 
 namespace Minus
 {
@@ -24,6 +36,6 @@ namespace Minus
 	/// <returns>returns true if successful</returns>
 	bool patchInitialize();
 
+	/// <summary>This function is used for testing the main features</summary>
 	void Learning();
 }
-#endif
