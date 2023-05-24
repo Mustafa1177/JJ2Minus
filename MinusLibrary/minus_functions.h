@@ -1,8 +1,5 @@
-#ifndef MINUS_FUNCTIONS_H
-#define MINUS_FUNCTIONS_H
+#pragma once
 
 bool RemoveMenuBar();
 
 void SendChatMessage(char* msg);
-
-#endif

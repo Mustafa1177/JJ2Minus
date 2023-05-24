@@ -1,5 +1,5 @@
-#ifndef JJVARIABLES_H
-#define JJVARIABLES_H
+#pragma once
+
 #include "addresses_table.h"
 namespace JJVariables
 {
@@ -11,6 +11,3 @@ namespace JJVariables
 
     extern bool init(GameAddressTable& gTbl);
 }
-
-#endif
-

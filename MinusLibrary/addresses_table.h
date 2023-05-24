@@ -1,5 +1,4 @@
-#ifndef ADDRESSES_TABLE_H
-#define ADDRESSES_TABLE_H
+#pragma once
 
 //============================================//
 //             Table Abstracts                //
@@ -100,5 +99,3 @@ public:
     GameFunctionsAddressTableV23();
 
 };
-
-#endif //ADDRESSES_TABLE_H

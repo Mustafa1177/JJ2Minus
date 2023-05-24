@@ -1,5 +1,5 @@
-#ifndef PLAYER_H 
-#define PLAYER_H
+#pragma once
+
 #include "pch.h" // use stdafx.h in Visual Studio 2017 and earlier
 #include "addresses_table.h"
 
@@ -16,5 +16,3 @@ private:
     int playerID = 0;
     int playerHandle;
 };
-
-#endif //PLAYER_H
